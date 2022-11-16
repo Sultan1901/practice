@@ -18,7 +18,7 @@ function App() {
   const [list, setlist] = useState([
     { name: "Sultan", id: 0, Hero: true },
     { name: "Ahmed", id: 1, Hero: true },
-    { name: "Naed", id: 2, Hero: true },
+    { name: "NaeF", id: 2, Hero: true },
     { name: "John", id: 3, Hero: false },
   ]);
   const add = (e) => {
@@ -28,6 +28,10 @@ function App() {
   };
   const remove = (del) => {
     setlist(list.filter((u) => u.id !== del));
+  };
+  const edit = (e) => {
+    let input = prompt('inter')
+    setlist(list.map((item,i)=>{if(i===e)item.name=input; return item}))
   };
 
   return (
@@ -48,12 +52,9 @@ function App() {
         {list.map((e, i) => {
           return (
             <>
-             
-                <h2 key={i} >
-                  {e.name}
-                </h2>
-                {<button onClick={() =>remove(i)}>del</button>}
-              {console.log(i)}
+              <h2 key={i}>{e.name}</h2>
+              {<button onClick={() => remove(i)}>del</button>}
+              {<button onClick={() => edit(i)}>edit</button>}
             </>
           );
         })}
