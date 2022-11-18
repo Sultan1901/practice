@@ -1,5 +1,10 @@
 import "./App.css";
 import { useState } from "react";
+import { Button } from "react-bootstrap";
+import ThemeProvider from "react-bootstrap/ThemeProvider";
+
+import Stack from "react-bootstrap/Stack";
+
 
 function App() {
   // const [num, setnum] = useState(0);
@@ -15,12 +20,7 @@ function App() {
   //   { name: "Abdulhakeem", id: 2, iscompleted: false },
   //   { name: "Ali", id: 3, iscompleted: true },
   // ];
-  const [list, setlist] = useState([
-    { name: "Sultan", id: 0, Hero: true },
-    { name: "Ahmed", id: 1, Hero: true },
-    { name: "NaeF", id: 2, Hero: true },
-    { name: "John", id: 3, Hero: false },
-  ]);
+  const [list, setlist] = useState([]);
   const add = (e) => {
     e.preventDefault();
     let inp = e.target.input.value;
@@ -30,8 +30,13 @@ function App() {
     setlist(list.filter((u) => u.id !== del));
   };
   const edit = (e) => {
-    let input = prompt('inter')
-    setlist(list.map((item,i)=>{if(i===e)item.name=input; return item}))
+    let input = prompt("inter");
+    setlist(
+      list.map((item, i) => {
+        if (i === e) item.name = input;
+        return item;
+      })
+    );
   };
 
   return (
@@ -44,7 +49,10 @@ function App() {
           <form onSubmit={add}>
             {" "}
             <input name="input" placeholder="add"></input>
-            <button>add new</button>
+            <ThemeProvider prefixes={{ btn: "my-btn" }}></ThemeProvider>{" "}
+            <Button as="a" variant="success">
+              add new
+            </Button>
           </form>
         </>
       }
@@ -52,13 +60,30 @@ function App() {
         {list.map((e, i) => {
           return (
             <>
-              <h2 key={i}>{e.name}</h2>
-              {<button onClick={() => remove(i)}>del</button>}
-              {<button onClick={() => edit(i)}>edit</button>}
+              <Stack gap={3}>
+                
+                  <div key={i} className="bg-light border">
+                    {" "}
+                    {e.name} - {e.id}
+                  </div>{" "}
+                
+              </Stack>
+              {
+                <Button variant="flat" n onClick={() => remove(i)}>
+                  del
+                </Button>
+              }
+              <br />
+              {
+                <Button variant="success" onClick={() => edit(i)}>
+                  edit
+                </Button>
+              }
             </>
           );
         })}
       </ul>
+      
     </>
   );
 }
