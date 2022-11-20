@@ -24,10 +24,10 @@ function App() {
   const add = (e) => {
     e.preventDefault();
     let inp = e.target.input.value;
-    setlist([...list, { name: inp, id: list.length + 1, hero: true }]);
+    setlist([...list, { name: inp, id: list.length+1 , hero: true,del :false }]);
   };
   const remove = (del) => {
-    setlist(list.filter((u) => u.id !== del));
+    setlist(list.filter((u) =>  u.name= del==true));
   };
   const edit = (e) => {
     let input = prompt("inter");
@@ -60,16 +60,16 @@ function App() {
         {list.map((e, i) => {
           return (
             <>
-              <Stack gap={3}>
-                
-                  <div key={i} className="bg-light border">
-                    {" "}
-                    {e.name} - {e.id}
-                  </div>{" "}
-                
+            {}
+            
+              <Stack direction="horizontal" gap={3}>
+                <div key={i} className="bg-light border">
+                  {" "}
+                  {e.name} - {e.id}
+                </div>{" "}
               </Stack>
               {
-                <Button variant="flat" n onClick={() => remove(i)}>
+                <Button  onClick={() => remove(i)}>
                   del
                 </Button>
               }
@@ -86,6 +86,8 @@ function App() {
       
     </>
   );
+
+
 }
 
 export default App;
